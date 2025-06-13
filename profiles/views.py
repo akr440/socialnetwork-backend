@@ -11,7 +11,7 @@ class ListProfile(APIView):
     permission_classes =[AllowAny]
     def get(self,request:Request):
         profiles=models.Profile.objects.all()
-        serialize=serializers.ProfileSerialsize(instance=profiles,many=True)
+        serialize=serializers.ProfileSerialsize(instance=profiles,many=True,context={"request":request})
         response={
             "message":"profiles",
             "profiles":serialize.data
@@ -22,7 +22,7 @@ class ProfileDetails(APIView):
     permission_classes=[IsAuthenticatedOrReadOnly]
     def get(self,request:Request,pk:int):
         profile=get_object_or_404(models.Profile,pk=pk)
-        serialize=serializers.ProfileSerialsize(instance=profile)
+        serialize=serializers.ProfileSerialsize(instance=profile,context={"request":request})
         response={
             "message":"Profile Details",
             "data":serialize.data
@@ -31,12 +31,12 @@ class ProfileDetails(APIView):
     
     def put(self,request:Request,pk:int):
         profile=get_object_or_404(models.Profile,pk=pk)
-        print(f"profile owner:{profile}")
+        print(f"profile owner:{profile.owner_id}")
         print(f"request user:{request.data}")
-        if profile.owner!=request.data["owner"]:
+        if profile.owner_id!=request.data["user_id"]:
             return Response(data={"message":"You cant modify others profile"},status=status.HTTP_403_FORBIDDEN)
         updated_data=request.data
-        serialize=serializers.ProfileSerialsize(profile,data=updated_data,partial=True)
+        serialize=serializers.ProfileSerialsize(profile,data=updated_data,partial=True,context={"request":request})
         if serialize.is_valid():
             serialize.save()
             response={

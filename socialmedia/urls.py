@@ -23,6 +23,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Refresh access token
     path('user/',include("accounts.urls")),
     path('profiles/',include("profiles.urls")),
+    path('posts/',include("posts.urls")),
 ]
 
 
