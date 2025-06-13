@@ -5,9 +5,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view,APIView
 from .import serializers
 from .import models
-
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 class ListProfile(APIView):
+    permission_classes =[AllowAny]
     def get(self,request:Request):
         profiles=models.Profile.objects.all()
         serialize=serializers.ProfileSerialsize(instance=profiles,many=True)
@@ -18,6 +19,7 @@ class ListProfile(APIView):
         return Response(data=response,status=status.HTTP_200_OK)
     
 class ProfileDetails(APIView):
+    permission_classes=[IsAuthenticatedOrReadOnly]
     def get(self,request:Request,pk:int):
         profile=get_object_or_404(models.Profile,pk=pk)
         serialize=serializers.ProfileSerialsize(instance=profile)
@@ -29,6 +31,10 @@ class ProfileDetails(APIView):
     
     def put(self,request:Request,pk:int):
         profile=get_object_or_404(models.Profile,pk=pk)
+        print(f"profile owner:{profile}")
+        print(f"request user:{request.data}")
+        if profile.owner!=request.data["owner"]:
+            return Response(data={"message":"You cant modify others profile"},status=status.HTTP_403_FORBIDDEN)
         updated_data=request.data
         serialize=serializers.ProfileSerialsize(profile,data=updated_data,partial=True)
         if serialize.is_valid():

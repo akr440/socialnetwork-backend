@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view,APIView
 from .import serializers
 from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny
-# from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
 class UserSignup(APIView):
@@ -35,7 +35,10 @@ class UserLogin(APIView):
         user=authenticate(email=email,password=password)
         print(f"user is {user}")
         if user is not None:
-            response = {"message": "Login Successfull", "user": user.username}
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+            tokens = {"access": str(refresh.access_token), "refresh": str(refresh)}
+            response = {"message": "Login Successfull", "user": user.username,"tokens":tokens}
             return Response(data=response, status=status.HTTP_200_OK)
         else:
             return Response(data={"message": "Invalid email or password"})
