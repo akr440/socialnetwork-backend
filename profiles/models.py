@@ -8,7 +8,7 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=255, blank=True)
-    dob=models.DateField()
+    dob=models.DateField(blank=True)
     content = models.TextField(blank=True,default="Welcome to your profile! Add some details about yourself.")
 
     class Meta:
@@ -20,6 +20,7 @@ class Profile(models.Model):
 
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(owner=instance,dob=instance.date_of_birth)
+        dob_value = getattr(instance, "date_of_birth", None)
+        Profile.objects.create(owner=instance,dob=dob_value)
 
 post_save.connect(create_profile, sender=User)

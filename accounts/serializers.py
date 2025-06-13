@@ -11,7 +11,7 @@ class SignupSerialsize(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email","password","username"]
+        fields = ["email","password","username","date_of_birth"]
 
     def validate(self, attrs):
             print(f"attrs value is {attrs}")

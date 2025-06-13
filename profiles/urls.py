@@ -3,6 +3,6 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
-    path('', views.UserSignup.as_view()),
-    path('login/',views.UserLogin.as_view())
+    path('', views.ListProfile.as_view()),
+    path('<int:pk>',views.ProfileDetails.as_view())
 ]

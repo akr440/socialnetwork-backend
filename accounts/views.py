@@ -14,6 +14,7 @@ class UserSignup(APIView):
     serializer_class=serializers.SignupSerialsize
     def post(self,request:Request):
         user_data=request.data
+        print(f"Requested user data:{user_data}")
         serialize=serializers.SignupSerialsize(data=user_data)
         if serialize.is_valid():
             serialize.save()
