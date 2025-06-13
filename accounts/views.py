@@ -17,12 +17,13 @@ class UserSignup(APIView):
         serialize=serializers.SignupSerialsize(data=user_data)
         if serialize.is_valid():
             serialize.save()
+            print(f"Serialized data:{serialize}")
             response={
                 "message":"user signed up succesfully",
                 "data":serialize.data
             }
             return Response(data=response,status=status.HTTP_201_CREATED)
-        return Response(data=serialize.error_messages,status=status.HTTP_400_BAD_REQUEST)
+        return Response(data=serialize.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLogin(APIView):
@@ -33,7 +34,7 @@ class UserLogin(APIView):
         user=authenticate(email=email,password=password)
         print(f"user is {user}")
         if user is not None:
-            response = {"message": "Login Successfull", "user": request.user}
+            response = {"message": "Login Successfull", "user": user.username}
             return Response(data=response, status=status.HTTP_200_OK)
         else:
             return Response(data={"message": "Invalid email or password"})

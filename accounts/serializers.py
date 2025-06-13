@@ -15,6 +15,7 @@ class SignupSerialsize(serializers.ModelSerializer):
 
     def validate(self, attrs):
             print(f"attrs value is {attrs}")
+
             email_exists = User.objects.filter(email=attrs["email"]).exists()
 
             if email_exists:
