@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'followers',
     'polls',
     'chattings',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +77,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'socialmedia.wsgi.application'
+# WSGI_APPLICATION = 'socialmedia.wsgi.application'
+
+ASGI_APPLICATION = 'socialmedia.asgi.application'
 
 
 # Database
@@ -150,4 +153,8 @@ REST_FRAMEWORK = {
     ),
 }
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Use Redis in production
+    },
+}
