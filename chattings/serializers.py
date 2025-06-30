@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Chatroom,Message,GroupChatroom,GroupMessage
+from .models import Chatroom,Message,GroupChatroom,GroupMessage, GroupMessageStatus, MessageStatus
 from accounts.models import User
 
 
@@ -27,6 +27,12 @@ class ChatroomSerializer(serializers.ModelSerializer):
             'id', 'created_at', 'user1', 'user2','messages',
         ]
 
+
+
+
+        #########################################################################################
+
+
 class GroupChatroomSerializer(serializers.ModelSerializer):
     created_by = serializers.ReadOnlyField(source='created_by.username')  # Fetches the username of the creator
     members = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
@@ -53,3 +59,4 @@ class GroupMessageSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'content', 'sender', 'group_chatroom', 'created_at',
         ]
+

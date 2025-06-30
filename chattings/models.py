@@ -22,7 +22,23 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.sender.username}: {self.content[:30]}"
-        
+    
+class MessageStatus(models.Model):
+    message=models.ForeignKey(Message,related_name='statuses',on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_read = models.BooleanField(default=False)
+    delivered_at = models.DateTimeField(auto_now_add=True)
+    read_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('message', 'user')
+
+    def __str__(self):
+        return f"{self.user.username} read {self.message.content[:30]}: {self.is_read}"
+
+
+      ######################################################################################################
+
 
 class GroupChatroom(models.Model):
     name = models.CharField(max_length=255)
@@ -39,5 +55,21 @@ class GroupMessage(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['created_at']
+
     def __str__(self):
         return f"{self.sender.username} in {self.group_chatroom.name}: {self.content[:30]}"
+    
+class GroupMessageStatus(models.Model):
+    group_message = models.ForeignKey(GroupMessage, related_name='statuses', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_read = models.BooleanField(default=False)
+    delivered_at = models.DateTimeField(auto_now_add=True)
+    read_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('group_message', 'user')
+
+    def __str__(self):
+        return f"{self.user.username} read {self.group_message.content[:30]}: {self.is_read}"

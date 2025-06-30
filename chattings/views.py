@@ -128,7 +128,7 @@ class ExitGroup(APIView):
 class GetGroupMessages(APIView):
     permission_classes=[IsAuthenticated]
     
-    def get(self,request:Request,group_id:int): #get all messages of a group chatroom
+    def get(self,request:Request,group_id:int): #get all messages of a group chatroom/chat history
         group=get_object_or_404(models.GroupChatroom,id=group_id)
         if request.user not in group.members.all():
             return Response(data={"message":"You are not a member of this group"},status=status.HTTP_403_FORBIDDEN)
