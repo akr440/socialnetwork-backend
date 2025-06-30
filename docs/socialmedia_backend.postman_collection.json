@@ -1,0 +1,965 @@
+{
+	"info": {
+		"_postman_id": "eba3ad81-8bc5-41b1-b606-ed1b5966f364",
+		"name": "socialmedia backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18698941"
+	},
+	"item": [
+		{
+			"name": "user signup api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user4@gmail.com\",\r\n    \"password\": \"user4@123\",\r\n    \"username\":\"user4\",\r\n    \"date_of_birth\":\"2002-02-02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/user/signup/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"user",
+						"signup",
+						""
+					]
+				},
+				"description": "## User Signup Endpoint\n\nThis endpoint allows new users to register by providing their email, password, and username. Upon successful registration, the server will respond with a confirmation message and the user's email and username.\n\n### Request\n\n- **Method**: POST\n    \n- **URL**: `http://localhost:8000/user/signup/`\n    \n\n#### Request Body\n\nThe request body must be sent in JSON format and should contain the following fields:\n\n- **email** (string): The email address of the user. This will be used for account verification and communication.\n    \n- **password** (string): The password chosen by the user for account security.\n    \n- **username** (string): The desired username for the user's account.\n    \n\n**Example of Request Body**:\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"password\": \"user@password123\",\n  \"username\": \"user123\"\n}\n\n ```\n\n### Response\n\nOn a successful signup, the server will return a response with the following structure:\n\n- **Status Code**: 201 (Created)\n    \n- **Content-Type**: application/json\n    \n\n#### Response Body\n\nThe response will contain a JSON object with the following fields:\n\n- **message** (string): A message indicating the result of the signup process. This may be an empty string if no additional message is provided.\n    \n- **data** (object): An object containing the following fields:\n    \n    - **email** (string): The email address of the newly registered user.\n        \n    - **username** (string): The username of the newly registered user, Its a required field.\n        \n\n**Example of Response Body**:\n\n``` json\n{\n  \"message\": \"user signed up succesfully\",\n  \"data\": {\n    \"email\": \"user@example.com\",\n    \"username\": \"user123\"\n  }\n}\n\n ```\n\n### Notes\n\n- Ensure that the email provided is unique and not already in use by another account."
+			},
+			"response": []
+		},
+		{
+			"name": "user login api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\":\"user1@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/user/login/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"user",
+						"login",
+						""
+					]
+				},
+				"description": "## User Login Endpoint\n\nThis endpoint allows users to authenticate by logging into their account.\n\n### HTTP Method\n\n`POST`\n\n### Endpoint\n\n`/user/login/`\n\n### Request Parameters\n\nThe request body must be in JSON format and should include the following parameters:\n\n- **email** (string): The email address associated with the user account.\n    \n- **password** (string): The password for the user account.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"password\": \"yourpassword\"\n}\n\n ```\n\n### Expected Response\n\nOn a successful login, the server will respond with a status code of `200` and a JSON object containing:\n\n- **message** (string): A message indicating the result of the login attempt.\n    \n- **user** (string): Information about the authenticated user.\n    \n\n**Example Response:**\n\n``` json\n{\n  \"message\": \"Login Successfull\",\n  \"user\": \"user_name\"\n}\n\n ```\n\n### Notes\n\nEnsure that the email and password provided in the request are correct to receive a successful response. The response will indicate the status of the login attempt."
+			},
+			"response": []
+		},
+		{
+			"name": "get all profiles api",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODE0MDM3LCJpYXQiOjE3NDk4MTA0MzcsImp0aSI6IjVlM2JjYjdhYWU0NTRiNjBiNWQwYjYyMGFhYTAxY2M4IiwidXNlcl9pZCI6MTF9.4h4aV5PbeBFJPtHGCSYfxwk20YOHJ5DEVwBklq9-EEc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user3@gmail.com\",\r\n    \"password\": \"user3@123\",\r\n    \"username\":\"user3\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/profiles",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a profile detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODE0MDM3LCJpYXQiOjE3NDk4MTA0MzcsImp0aSI6IjVlM2JjYjdhYWU0NTRiNjBiNWQwYjYyMGFhYTAxY2M4IiwidXNlcl9pZCI6MTF9.4h4aV5PbeBFJPtHGCSYfxwk20YOHJ5DEVwBklq9-EEc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/profiles/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"profiles",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updating a profile api",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5Nzk4NDE3LCJpYXQiOjE3NDk3OTQ4MTcsImp0aSI6IjRkMzAxMWYwOGUwZTQ3M2FiZWQ5MDIyNmFmODllNTE2IiwidXNlcl9pZCI6OX0.5jOnIFk9gy53o-gutef4JJybQn-jSw9Wy7bSZ10kqWo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{           \"user_id\":9,\r\n            \"id\": 1,\r\n            \"owner\": \"user9\",\r\n            \"created_at\": \"2025-06-13T05:01:35.814972Z\",\r\n            \"updated_at\": \"2025-06-13T06:26:09.104740Z\",\r\n            \"name\": \"addnewname\",\r\n            \"dob\": \"2001-12-12\",\r\n            \"content\": \"Welcome to your profile! Add some details about yourself.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/profiles/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"profiles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh token api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDQxNTIzNywiaWF0IjoxNzQ5ODEwNDM3LCJqdGkiOiI5YzBkYmEzZWUwMDY0NGU2ODE5NDk3MDkzNzQ0ZTgzMyIsInVzZXJfaWQiOjExfQ.DWf62pLbf05jeDB39-r0sgXw_jBY6PD0LG1dcNmmeHk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/token/refresh/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"token",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODE3NzczLCJpYXQiOjE3NDk4MTA0MzcsImp0aSI6IjBhODdhZjE1NzNiYTRiZTJiZDkwMmY0MzZkZTM0Zjk1IiwidXNlcl9pZCI6MTF9.GqKb9wfp6_pp49A2pEicIQZKH6SLJ_sXkPhV3Y42Zjg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"My first post\",\r\n    \"content\":\"lorem ipsimjkhfj jhfshf jhjfdfj hfjjah fafhjh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/all",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get post detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODE3NzczLCJpYXQiOjE3NDk4MTA0MzcsImp0aSI6IjBhODdhZjE1NzNiYTRiZTJiZDkwMmY0MzZkZTM0Zjk1IiwidXNlcl9pZCI6MTF9.GqKb9wfp6_pp49A2pEicIQZKH6SLJ_sXkPhV3Y42Zjg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/posts/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODE3NzczLCJpYXQiOjE3NDk4MTA0MzcsImp0aSI6IjBhODdhZjE1NzNiYTRiZTJiZDkwMmY0MzZkZTM0Zjk1IiwidXNlcl9pZCI6MTF9.GqKb9wfp6_pp49A2pEicIQZKH6SLJ_sXkPhV3Y42Zjg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 1,\r\n        \"user_id\":11,\r\n        \"title\": \"My first post 4th updated\",\r\n        \"content\": \"lorem ipsimjkhfj jhfshf jhjfdfj hfjjah fafhjh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/1/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "log out user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODE3NzczLCJpYXQiOjE3NDk4MTA0MzcsImp0aSI6IjBhODdhZjE1NzNiYTRiZTJiZDkwMmY0MzZkZTM0Zjk1IiwidXNlcl9pZCI6MTF9.GqKb9wfp6_pp49A2pEicIQZKH6SLJ_sXkPhV3Y42Zjg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDQxNTIzNywiaWF0IjoxNzQ5ODEwNDM3LCJqdGkiOiI5YzBkYmEzZWUwMDY0NGU2ODE5NDk3MDkzNzQ0ZTgzMyIsInVzZXJfaWQiOjExfQ.DWf62pLbf05jeDB39-r0sgXw_jBY6PD0LG1dcNmmeHk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/user/logout/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"user",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add a comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODI2Mzc4LCJpYXQiOjE3NDk4MjI3NzgsImp0aSI6IjNhMjM4NWE5ZDZlODQxYTVhMjk1MmJhNzIxYzQ2YTFiIiwidXNlcl9pZCI6MTJ9.fE9wEd6LDnTsFYAznsyZ6xq1ol2dB7CQNMnDH-eToNA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"commenting on the post id 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/1/comments/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all comments on a post",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODI2Mzc4LCJpYXQiOjE3NDk4MjI3NzgsImp0aSI6IjNhMjM4NWE5ZDZlODQxYTVhMjk1MmJhNzIxYzQ2YTFiIiwidXNlcl9pZCI6MTJ9.fE9wEd6LDnTsFYAznsyZ6xq1ol2dB7CQNMnDH-eToNA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"1st comment on the  post id 1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/1/comments/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific comment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODI2Mzc4LCJpYXQiOjE3NDk4MjI3NzgsImp0aSI6IjNhMjM4NWE5ZDZlODQxYTVhMjk1MmJhNzIxYzQ2YTFiIiwidXNlcl9pZCI6MTJ9.fE9wEd6LDnTsFYAznsyZ6xq1ol2dB7CQNMnDH-eToNA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"1st comment on the  post id 1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/comments/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a comment",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODI2OTY1LCJpYXQiOjE3NDk4MjMzNjUsImp0aSI6IjZmNjE5OGJhYjkwZTQxODY5MjQ5YWMyY2NiM2E5OWM5IiwidXNlcl9pZCI6MTF9.adqihUuY8zjDf96eE5MIVwk1YwcpERJbBeWQlNYTrbw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"content\": \"1st comment on the  post id 1, updating it again\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/comments/1/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"comments",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a comment",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODI2Mzc4LCJpYXQiOjE3NDk4MjI3NzgsImp0aSI6IjNhMjM4NWE5ZDZlODQxYTVhMjk1MmJhNzIxYzQ2YTFiIiwidXNlcl9pZCI6MTJ9.fE9wEd6LDnTsFYAznsyZ6xq1ol2dB7CQNMnDH-eToNA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/comments/1/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"comments",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get likes of a post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/1/likes",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a like on a post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/1/like",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a like from a post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/1/like/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1",
+						"like",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow a user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/follow/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"follow",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unfollow a user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODgxODk1LCJpYXQiOjE3NDk4NzgyOTUsImp0aSI6IjA4NDk1NWI3YzdjZDRjYWNiYmE1MWEzYzU5YzJjOGQyIiwidXNlcl9pZCI6MTR9.FcYbrVX3SjLe5bBM3m7Tr80arIIDHICSvBcU9JUUcjo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/unfollow/11/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"unfollow",
+						"11",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followers list",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "list of followings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODgyMjU4LCJpYXQiOjE3NDk4Nzg2NTgsImp0aSI6IjViMmZhODcyMmQ1YTQyZjJiNzgyM2YzYTg1NzU3NDJlIiwidXNlcl9pZCI6MTF9.9YxQinhB3Lr4ZX_DqqXcVZoUjqjmsZwYsUx5Bcv6c_E",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/followings",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"followings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a poll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODgyMjU4LCJpYXQiOjE3NDk4Nzg2NTgsImp0aSI6IjViMmZhODcyMmQ1YTQyZjJiNzgyM2YzYTg1NzU3NDJlIiwidXNlcl9pZCI6MTF9.9YxQinhB3Lr4ZX_DqqXcVZoUjqjmsZwYsUx5Bcv6c_E",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/polls/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"polls",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a poll detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5ODgyMjU4LCJpYXQiOjE3NDk4Nzg2NTgsImp0aSI6IjViMmZhODcyMmQ1YTQyZjJiNzgyM2YzYTg1NzU3NDJlIiwidXNlcl9pZCI6MTF9.9YxQinhB3Lr4ZX_DqqXcVZoUjqjmsZwYsUx5Bcv6c_E",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/polls/1/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"polls",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vote in a poll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\":\"user1@123\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/polls/1/vote",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"polls",
+						"1",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a poll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\":\"user1@123\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/polls/1/delete",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"polls",
+						"1",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a chatroom with an user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTE1NDI1LCJpYXQiOjE3NDk5MTE4MjUsImp0aSI6IjA3YTI5NTg4M2FkMjQ1MmE4MDM4NzE2NDMzNzIyNjNmIiwidXNlcl9pZCI6MTF9.piqZxgLUOfkdPUknezCSfUPEiRHViQu4jWcpmUJHp60",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\":\"user1@123\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/chatroom/13/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"chatroom",
+						"13",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all the chatrooms of a user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTE2MDExLCJpYXQiOjE3NDk5MTI0MTEsImp0aSI6IjllZmQ2ODQxMTc0ZTQzYzRiMzQxNDZhNDg0N2Q0ZWQzIiwidXNlcl9pZCI6MTN9.HLtgN6Is2Cc5WypfXVgI6vKxxI-1UnV55IkDp3gMbLg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\":\"user1@123\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/chatroom/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"chatroom",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send message in a chatroom",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTE2MDExLCJpYXQiOjE3NDk5MTI0MTEsImp0aSI6IjllZmQ2ODQxMTc0ZTQzYzRiMzQxNDZhNDg0N2Q0ZWQzIiwidXNlcl9pZCI6MTN9.HLtgN6Is2Cc5WypfXVgI6vKxxI-1UnV55IkDp3gMbLg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"Hi once again\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/message/2/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"message",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get chat history of a chatroom",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "create a group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMTgyMDM3LCJpYXQiOjE3NTExNzg0MzcsImp0aSI6ImE5YTY4ZTg1YmZmZTRmYzY5ZGVmM2Q2NmViM2ZiMjE1IiwidXNlcl9pZCI6MTN9.8s6aE_7HSbZWnJZv85zxycHw2_R4wuNK4tKlqhF9nS4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Project Alpha\",\r\n  \"members\": [11, 12]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/groupchatroom/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"groupchatroom",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list of groups for a user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Add a group member",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMTgyMDM3LCJpYXQiOjE3NTExNzg0MzcsImp0aSI6ImE5YTY4ZTg1YmZmZTRmYzY5ZGVmM2Q2NmViM2ZiMjE1IiwidXNlcl9pZCI6MTN9.8s6aE_7HSbZWnJZv85zxycHw2_R4wuNK4tKlqhF9nS4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_id\":14\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/groupchatroom/1/addmember/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"groupchatroom",
+						"1",
+						"addmember",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a group details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMTgyMDM3LCJpYXQiOjE3NTExNzg0MzcsImp0aSI6ImE5YTY4ZTg1YmZmZTRmYzY5ZGVmM2Q2NmViM2ZiMjE1IiwidXNlcl9pZCI6MTN9.8s6aE_7HSbZWnJZv85zxycHw2_R4wuNK4tKlqhF9nS4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/groupchatroom/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"groupchatroom",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove a user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Leave a group",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUxMTgyMDM3LCJpYXQiOjE3NTExNzg0MzcsImp0aSI6ImE5YTY4ZTg1YmZmZTRmYzY5ZGVmM2Q2NmViM2ZiMjE1IiwidXNlcl9pZCI6MTN9.8s6aE_7HSbZWnJZv85zxycHw2_R4wuNK4tKlqhF9nS4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/groupchatroom/1/exit",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"groupchatroom",
+						"1",
+						"exit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "group chat history",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "localhost:8000",
+			"type": "default"
+		}
+	]
+}
