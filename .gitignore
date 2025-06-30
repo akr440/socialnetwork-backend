@@ -1,2 +1,23 @@
-env
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# Django
+db.sqlite3
+env/
 .env
+*.pyc
+
+# Docker
+*.pid
+*.db
+*.log
+*.sock
+
+
+# VSCode or other IDEs
+.vscode/
+.idea/
+
