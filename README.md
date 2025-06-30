@@ -22,18 +22,26 @@ A scalable, real-time backend for a modern social networking platform—built wi
 ```bash
 git clone https://github.com/your-username/socialnetwork-backend.git
 cd socialnetwork-backend
+```
 
 ### 2. Create Your .env File
+```bash
 cp .env.template .env
+```
 Fill in your environment variables like DJANGO_SECRET_KEY, DEBUG, etc
 
 
+
 ### 3. Build and Run with Docker
+```bash
 docker-compose build
 docker-compose up
+```
 
 ### 4. Run Migrations
+```bash
 docker-compose exec web python manage.py migrate
+```
 
 ## 🧱 🛠️ Tech Stack
 This project is built using a modern, modular backend architecture designed for scalability and real-time performance.
