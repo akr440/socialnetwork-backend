@@ -1,0 +1,30 @@
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+env/
+venv/
+
+# Git and version control
+.git/
+.gitignore
+
+# Docker artifacts
+*.log
+*.sqlite3
+*.db
+*.pid
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# Environment files (optional if you inject them differently)
+.env
+.env.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
