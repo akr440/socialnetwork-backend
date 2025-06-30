@@ -10,7 +10,9 @@ WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
 
 # Copy project files
 COPY . .
@@ -18,5 +20,5 @@ COPY . .
 # Expose port (optional, for documentation)
 EXPOSE 8000
 
-# Run the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run the Daphne ASGI server
+CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "socialmedia.asgi:application"]
