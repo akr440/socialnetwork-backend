@@ -54,4 +54,18 @@ This project is built using a modern, modular backend architecture designed for 
 - SQLite – Lightweight database used for local development.
 - Docker – Containerizes the application for consistent development and deployment environments
 
+## 📡 API Endpoints
+
+You can test the API using the provided 📥 Postman collection:
+👉 [Download Postman Collection](./docs/socialmedia_backend.postman_collection.json)
+To use the collection:
+1. Download the file above.
+2. Open Postman and click "Import".
+3. Select the downloaded `.json` file.
+
+## 📈 Future Enhancements
+- 🔄 Switch to PostgreSQL for production-grade performance
+- 🧵 Add Redis for scalable WebSocket handling
+- 📱 Add rate limiting and notifications
+- 🧪 Many more advance features to come....it wont stop just here...
 
